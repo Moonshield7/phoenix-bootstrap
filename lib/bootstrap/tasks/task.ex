@@ -4,9 +4,10 @@ defmodule Todolist.Tasks.Task do
 
   schema "tasks" do
     field :status, :string
-    field :user, :string
     field :description, :string
     field :title, :string
+    # field :user_id, :id
+    belongs_to :user, EctoAssoc.User
 
     timestamps(type: :utc_datetime)
   end
@@ -14,7 +15,7 @@ defmodule Todolist.Tasks.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:title, :description, :status, :user])
-    |> validate_required([:title, :description, :status, :user])
+    |> cast(attrs, [:title, :description, :status])
+    |> validate_required([:title, :description, :status])
   end
 end
